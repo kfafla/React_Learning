@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5_JSX任务练习</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+       const taskList = [
+        {id: 1,name: "吃饭",completed: true,},
+        {id: 2, name: "睡觉",completed: false,},
+        {id: 3,name: "敲代码",completed: false,},
+    ];
+       const element = (
+        <div>
+          <h2>当前未完成任务数：{taskList.filter((task) => !task.completed).length}</h2>
+          <div className="task-list">
+            {taskList.map((task) => (
+              <div
+                key={task.id}
+                style={{
+                  color: task.completed ? "green" : "red",
+                }}
+              >
+                {task.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+      const root = ReactDOM.createRoot(document.querySelector("#root"));
+      root.render(element);
+    </script>
+  </body>
+</html>
