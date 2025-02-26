@@ -12,8 +12,8 @@
 // import Button1 from "./components/Button1";
 // import InputParent from "./components/InputParent";
 // import RegistPage from "./components/RegistPage";
-import Card from "./components/Card";
-const App = ()=> {
+// import Card from "./components/Card";
+// const App = ()=> {
    // const studentData = {
    //   name: "小铭",
    //   age: 23,
@@ -26,7 +26,7 @@ const App = ()=> {
    // const handleClick = () => {
    //    alert("点击了按钮11")
    // }
-   return (
+  //  return (
      <>
        {/* <WelcomeClass name="World" /> */}
        {/* <WelcomeFunc name="World"/> */}
@@ -47,12 +47,50 @@ const App = ()=> {
       {/* <Button1 onClick={handleClick} /> */}
       {/* <InputParent /> */}
       {/* <RegistPage /> */}
-      <Card 
+      {/* <Card 
         header={<h1>标题</h1>}
         body={<div>内容</div>}
         footer={<button>按钮</button>}
-      />
+      /> */}
      </>
-   );
-};
+//    );
+// };
+import { useState } from "react";
+import BookInput from "./components/Book/BookInput";
+import BookList from "./components/Book/BookList";
+import BookDetail from "./components/Book/BookDetail";
+
+const App = () => {
+  const [books, setBooks] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  const addBook = (book) => {
+    setBooks([...books, book])
+  }
+
+  const deleteBook = (book) => {
+    setBooks(books.filter((b) => b !== book))
+    setSelectedBook(null)
+  }
+
+const editBook = (updatedBook) => {
+  setBooks(
+    books.map((b) => (b === selectedBook ? updatedBook : b))
+  )
+  setSelectedBook(updatedBook)
+}
+return (
+  <div className="app">
+    <h1>图书管理系统</h1>
+    <BookInput onAddBook={addBook} />
+    <BookList
+      books={books}
+      onSelectBook={setSelectedBook}
+      onDeleteBook={deleteBook}
+    />
+    {selectedBook && <BookDetail book={selectedBook} onEditBook={editBook} />}
+  </div>
+);
+}
+
 export default App;
