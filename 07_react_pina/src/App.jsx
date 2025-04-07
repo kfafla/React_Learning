@@ -7,12 +7,16 @@ import UpdateUser from "./components/UpdateUser";
 import React from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { increment,decrement } from "./store/actions";
+import Home from "./components/Home";
 function App() {
  const count = useSelector((state) => state.count);
  const dispath = useDispatch()
 
   return (
     <>
+    <div>
+      <Home />
+    </div>
     <div>
       <CounterUseState />
       <Profile />
